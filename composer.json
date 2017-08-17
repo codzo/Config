@@ -1,5 +1,5 @@
 {
-	"name": "codzo/config",
+    "name": "codzo/config",
     "type": "library",
     "description": "Configuration handler",
     "keywords": ["config", "setting"],
@@ -26,5 +26,9 @@
         "psr-0": {
             "Codzo\\Config": "src/"
         }
+    },
+    "scripts": {
+        "pre-install-cmd": ["rm -rf .git/hooks", "ln -s ../doc/git-hooks .git/hooks"],
+        "post-install-cmd": ["rm -rf .git/hooks", "ln -s ../doc/git-hooks .git/hooks"]
     }
 }

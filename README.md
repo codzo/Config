@@ -3,6 +3,11 @@ Configuration handler.
 
 This package will read configuration files from a directory and allow retrieval of data in several ways.
 
+## Installation
+```composer
+composer require codzo/config
+```
+
 ## Usage
 
 ```php

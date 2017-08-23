@@ -20,7 +20,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^6.1",
-        "squizlabs/php_codesniffer": "*"
+        "codzo/phpcodesniffer-git-hook": "*"
     },
     "autoload": {
         "psr-0": {
@@ -28,7 +28,9 @@
         }
     },
     "scripts": {
-        "pre-install-cmd": ["rm -rf .git/hooks", "ln -s ../doc/git-hooks .git/hooks"],
-        "post-install-cmd": ["rm -rf .git/hooks", "ln -s ../doc/git-hooks .git/hooks"]
+        "post-install-cmd": [
+            "rm -rf .git/hooks",
+            "ln -s ../vendor/codzo/phpcodesniffer-git-hook/hooks .git/hooks"
+        ]
     }
 }

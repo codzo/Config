@@ -42,9 +42,8 @@ XML files will be parsed using `simplexml_load_file()` method.
 
 The configuration loaded from all files will then be merged together. Duplicated items will be overwritten without any warning.
 
-## Retrive the configuration
+## Retrieve the configuration
 Configurations can be retrieved in several ways.
-+ as an array
-Use keys to navigate in multiplication arrays
-+ quick search
-Concat the keys into a path and get the configuration quickly.
++ as an array: Use keys to navigate in multiplication arrays
++ quick search: Concat the keys into a path and get the configuration quickly.
+

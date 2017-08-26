@@ -12,7 +12,6 @@ composer require codzo/config
 
 ```php
 $config = new \Codzo\Config\Config('./config');
-$config->load();
 
 // retrieve the config
 $app = $config->get('app');

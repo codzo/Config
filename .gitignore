@@ -1,6 +1,8 @@
 tags
 vendor
 reports
+config/*
+!config/*.dist
 
 .DS_Store
 .*.swp

@@ -12,9 +12,8 @@ use Codzo\Config\Driver\AbstractDriver;
 
 /**
  * Config class
- * Class Codzo\Config\Config will load supported files from a directory and 
+ * Class Codzo\Config\Config will load supported files from a directory and
  * allow retrieve of the settings by a string presenting the setting name.
- * @coversDefaultClass \Codzo\Config\Config
  */
 class Config
 {
@@ -41,8 +40,8 @@ class Config
 
     /**
      * All settings loaded from config directory
-     * This variable has an array data type, with the config directory as key 
-     * and loaded configurations as value. Data will be shared within multiple 
+     * This variable has an array data type, with the config directory as key
+     * and loaded configurations as value. Data will be shared within multiple
      * Config instances to minimise the payload of reuse.
      */
     protected static $master_settings=[];
@@ -56,10 +55,10 @@ class Config
      * constructor
      * @parama string $directory config directory, if null use DEFAULT_CONFIG_DIRECTORY
      */
-    public function __construct($directory=NULL)
+    public function __construct($directory = null)
     {
         if ($directory) {
-            if ( ! is_dir($directory)) {
+            if (! is_dir($directory)) {
                 throw new InvalidConfigDirectoryException();
             }
             $this->config_directory = $directory ;
@@ -77,7 +76,7 @@ class Config
      * get the config directory
      * @return string config directory
      */
-    public function getConfigDirectory() 
+    public function getConfigDirectory()
     {
         return $this->config_directory;
     }
@@ -90,7 +89,7 @@ class Config
     public function getDriverClassName($filename)
     {
         $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-        if ( isset(self::DRIVER_MAPPING[$ext])) {
+        if (isset(self::DRIVER_MAPPING[$ext])) {
             return self::DRIVER_MAPPING[$ext];
         }
 
@@ -123,10 +122,10 @@ class Config
     public function getConfigFileList()
     {
         $list = [];
-		if ($handle = opendir($this->config_directory)) {
-			while (false !== ($file = readdir($handle))) {
-				// do something with the file
-				// note that '.' and '..' is returned even
+        if ($handle = opendir($this->config_directory)) {
+            while (false !== ($file = readdir($handle))) {
+                // do something with the file
+                // note that '.' and '..' is returned even
                 if ($file[0]=='.') {
                     continue;
                 }
@@ -139,9 +138,9 @@ class Config
                 if ($driver_class_name && class_exists($driver_class_name)) {
                     $list[] = $file;
                 }
-			}
-			closedir($handle);
-		}
+            }
+            closedir($handle);
+        }
 
         return $list;
     }
@@ -150,7 +149,7 @@ class Config
      * load the settings
      * @param  bool $force if TRUE will force to reload
      */
-    public function load($force=false)
+    public function load($force = false)
     {
         if ($force) {
             $this->settings = [];
@@ -194,7 +193,7 @@ class Config
      * @param  mixed  $default the default value
      * @return mixed  $value   the setting value
      */
-    public function get($name, $default=null)
+    public function get($name, $default = null)
     {
         // do we have an exact match?
         if (isset($this->settings[$name])) {

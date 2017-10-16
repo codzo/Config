@@ -70,8 +70,6 @@ class Config
             static::$master_settings[$this->config_directory] = [];
         }
         $this->settings = &static::$master_settings[$this->config_directory];
-
-        $this->load();
     }
 
     /**
@@ -124,7 +122,8 @@ class Config
     public function getConfigFileList()
     {
         $list = [];
-        if ($handle = opendir($this->config_directory)) {
+        if (is_readable($this->config_directory)
+            && $handle = opendir($this->config_directory)) {
             while (false !== ($file = readdir($handle))) {
                 // do something with the file
                 // note that '.' and '..' is returned even
@@ -219,5 +218,15 @@ class Config
             }
         }
         return $default;
+    }
+
+    /**
+     * set an item manually
+     * @param  string $name    the setting name
+     * @param  mixed  $value   the setting value
+     */
+    public function set($name, $value)
+    {
+        $this->settings[$name] = $value ;
     }
 }

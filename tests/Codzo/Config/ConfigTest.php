@@ -13,12 +13,12 @@ final class ConfigTest extends TestCase
     public function testCanUseNullAsParameterForConstructor()
     {
         $config = new Config();
-		$this->assertInstanceOf(
+        $this->assertInstanceOf(
             Config::class,
             $config
         );
 
-		$this->assertEquals(
+        $this->assertEquals(
             Config::DEFAULT_CONFIG_DIRECTORY,
             $config->getConfigDirectory()
         );
@@ -27,12 +27,12 @@ final class ConfigTest extends TestCase
     public function testCanUseDirectoryAsParameterForConstructor()
     {
         $config = new Config('.');
-		$this->assertInstanceOf(
+        $this->assertInstanceOf(
             Config::class,
             $config
         );
 
-		$this->assertEquals(
+        $this->assertEquals(
             '.',
             $config->getConfigDirectory()
         );
@@ -48,12 +48,12 @@ final class ConfigTest extends TestCase
     {
         $config = new Config();
 
-		$this->assertEquals(
+        $this->assertEquals(
             'Codzo\Config\Driver\Php',
             $config->getDriverClassName('config/app.php')
         );
 
-		$this->assertEquals(
+        $this->assertEquals(
             'Codzo\Config\Driver\Ini',
             $config->getDriverClassName('config/app.ini')
         );
@@ -61,7 +61,7 @@ final class ConfigTest extends TestCase
         /**
          * Invalid file ext will map to a blank string
          */
-		$this->assertEquals(
+        $this->assertEquals(
             '',
             $config->getDriverClassName('config/app.invalid-file-ext')
         );
@@ -70,7 +70,7 @@ final class ConfigTest extends TestCase
     public function testGetConfigFileList()
     {
         $config = new Config(__DIR__ . "/../../config");
-		$this->assertEmpty(
+        $this->assertEmpty(
             array_diff(
                 ['app.php', 'app.ini', 'app.xml'],
                 $config->getConfigFileList()
@@ -82,22 +82,39 @@ final class ConfigTest extends TestCase
     {
         $config = new Config(__DIR__ . "/../../config");
         $config->load();
-		$this->assertEquals(
+        $this->assertEquals(
             '1.0-development',
             $config->get('config.xml.version')
         );
-		$this->assertNull(
+        $this->assertNull(
             $config->get('config.xml.invalid-setting-name')
         );
-		$this->assertNull(
+        $this->assertNull(
             $config->get('config.invalid-middle-path.version')
         );
-		$this->assertEquals(
+        $this->assertEquals(
             [
                 'enabled' => '1',
                 'version' => '1.0-development'
             ],
             $config->get('config.xml')
+        );
+    }
+
+    public function testSet()
+    {
+        $config = new Config(__DIR__ . "/../../config");
+        $config->load();
+        $config->set('config.xml.version', '0.001');
+        $this->assertEquals(
+            '0.001',
+            $config->get('config.xml.version')
+        );
+
+        $config->set('config.invalid-setting', true);
+        $this->assertEquals(
+            true,
+            $config->get('config.invalid-setting')
         );
     }
 }

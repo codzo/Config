@@ -19,22 +19,22 @@ final class ConfigTest extends TestCase
         );
 
         $this->assertEquals(
-            Config::DEFAULT_CONFIG_DIRECTORY,
-            $config->getConfigDirectory()
+            realpath(Config::DEFAULT_CONFIG_DIRECTORY),
+            realpath($config->getConfigDirectory())
         );
     }
 
     public function testCanUseDirectoryAsParameterForConstructor()
     {
-        $config = new Config('.');
+        $config = new Config('config-another');
         $this->assertInstanceOf(
             Config::class,
             $config
         );
 
         $this->assertEquals(
-            '.',
-            $config->getConfigDirectory()
+            realpath('config-another'),
+            realpath($config->getConfigDirectory())
         );
     }
 
@@ -81,7 +81,6 @@ final class ConfigTest extends TestCase
     public function testLoad()
     {
         $config = new Config(__DIR__ . "/../../config");
-        $config->load();
         $this->assertEquals(
             '1.0-development',
             $config->get('config.xml.version')
@@ -104,7 +103,6 @@ final class ConfigTest extends TestCase
     public function testSet()
     {
         $config = new Config(__DIR__ . "/../../config");
-        $config->load();
         $config->set('config.xml.version', '0.001');
         $this->assertEquals(
             '0.001',

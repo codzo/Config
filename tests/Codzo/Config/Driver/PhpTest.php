@@ -10,8 +10,6 @@ use Codzo\Config\Exception\InvalidConfigFileException;
  */
 final class PhpTest extends TestCase
 {
-    private $dir = __DIR__ . '/../../../config/' ;
-
     public function testCanCreateInstance()
     {
         $parser = new Php();
@@ -24,7 +22,7 @@ final class PhpTest extends TestCase
     public function testCanParseValidFile()
     {
         $parser = new Php();
-        $r = $parser->parse($this->dir . 'app.php');
+        $r = $parser->parse('config/app.php');
 
 		$this->assertTrue(
             $r['config']['php']['enabled']
@@ -47,7 +45,7 @@ final class PhpTest extends TestCase
     {
         $parser = new Php();
         $this->expectException(InvalidConfigFileException::class);
-        $parser->parse($this->dir . 'invalid/invalid.php');
+        $parser->parse('config-invalid/invalid.php');
     }
 
 
@@ -55,6 +53,13 @@ final class PhpTest extends TestCase
     {
         $parser = new Php();
         $this->expectException(InvalidConfigFileException::class);
-        $parser->parse($this->dir . 'invalid/empty.file');
+        $parser->parse('config-invalid/empty.file');
+    }
+
+    public function testCanHandleInjection()
+    {
+        $parser = new Php();
+        $this->expectException(InvalidConfigFileException::class);
+        $parser->parse(';rm /tmp');
     }
 }

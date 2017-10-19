@@ -70,6 +70,8 @@ class Config
             static::$master_settings[$this->config_directory] = [];
         }
         $this->settings = &static::$master_settings[$this->config_directory];
+
+        $this->load();
     }
 
     /**

@@ -23,7 +23,15 @@ class Php extends AbstractDriver
         $output = [];
         $rt     = false;
 
-        @exec('php -l '.escapeshellarg(realpath($file_path)), $output, $rt);
+        // detect if the php script has any syntax error
+        // redirect stderr to make test output pretty
+        $cmd = sprintf(
+            'php -l %s 2> /dev/null',
+            escapeshellarg(
+                realpath($file_path)
+            )
+        );
+        @exec($cmd, $output, $rt);
         if ($rt === 0) {
             $data = @include($file_path);
         }

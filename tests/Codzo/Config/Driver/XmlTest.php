@@ -10,7 +10,7 @@ use Codzo\Config\Exception\InvalidConfigFileException;
  */
 final class XmlTest extends TestCase
 {
-    private $dir = __DIR__ . '/../../../config/' ;
+    private $dir = 'config/' ;
 
     public function testCanCreateInstance()
     {
@@ -24,7 +24,7 @@ final class XmlTest extends TestCase
     public function testCanParseValidFile()
     {
         $parser = new Xml();
-        $r = $parser->parse($this->dir . 'app.xml');
+        $r = $parser->parse('config/app.xml');
 
 		$this->assertEquals(
             1,
@@ -48,7 +48,7 @@ final class XmlTest extends TestCase
     {
         $parser = new Xml();
         $this->expectException(InvalidConfigFileException::class);
-        $parser->parse($this->dir . 'invalid/invalid.xml');
+        $parser->parse('config-invalid/invalid.xml');
     }
 
 
@@ -56,7 +56,7 @@ final class XmlTest extends TestCase
     {
         $parser = new Xml();
         $this->expectException(InvalidConfigFileException::class);
-        $parser->parse($this->dir . 'invalid/empty.file');
+        $parser->parse('config-invalid/empty.file');
     }
 
 }

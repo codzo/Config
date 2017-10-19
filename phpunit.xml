@@ -1,4 +1,4 @@
-<phpunit bootstrap="bootstrap.php" >
+<phpunit bootstrap="tests/bootstrap.php" >
 	<testsuites>
 		<testsuite name="all">
             <directory>tests</directory>
@@ -9,6 +9,9 @@
             <directory suffix=".php">tests</directory>
             <exclude>
                 <directory suffix=".php">tests/config</directory>
+                <directory suffix=".php">tests/config-another</directory>
+                <directory suffix=".php">tests/config-invalid</directory>
+                <file>tests/bootstrap.php</file>
             </exclude>
         </whitelist>
     </filter>

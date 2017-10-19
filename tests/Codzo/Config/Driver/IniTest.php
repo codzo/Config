@@ -10,8 +10,6 @@ use Codzo\Config\Exception\InvalidConfigFileException;
  */
 final class IniTest extends TestCase
 {
-    private $dir = __DIR__ . '/../../../config/' ;
-
     public function testCanCreateInstance()
     {
         $parser = new Ini();
@@ -24,7 +22,7 @@ final class IniTest extends TestCase
     public function testCanParseValidFile()
     {
         $parser = new Ini();
-        $r = $parser->parse($this->dir . 'app.ini');
+        $r = $parser->parse('config/app.ini');
 
 		$this->assertEquals(
             1,
@@ -48,7 +46,7 @@ final class IniTest extends TestCase
     {
         $parser = new Ini();
         $this->expectException(InvalidConfigFileException::class);
-        $parser->parse($this->dir . 'invalid/invalid.ini');
+        $parser->parse('config-invalid/invalid.ini');
     }
 
 
@@ -56,13 +54,13 @@ final class IniTest extends TestCase
     {
         $parser = new Ini();
         $this->expectException(InvalidConfigFileException::class);
-        $parser->parse($this->dir . 'invalid/empty.file');
+        $parser->parse('config-invalid/empty.file');
     }
 
     public function testCanParseArrayData()
     {
         $parser = new Ini();
-        $r = $parser->parse($this->dir . 'app.ini');
+        $r = $parser->parse('config/app.ini');
 
 		$this->assertInternalType(
             'array',

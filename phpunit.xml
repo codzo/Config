@@ -1,25 +1,19 @@
 <phpunit bootstrap="tests/bootstrap.php" >
 	<testsuites>
 		<testsuite name="all">
-            <directory>tests</directory>
+            <directory>tests/Codzo</directory>
 		</testsuite>
 	</testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">tests</directory>
-            <exclude>
-                <directory suffix=".php">tests/config</directory>
-                <directory suffix=".php">tests/config-another</directory>
-                <directory suffix=".php">tests/config-invalid</directory>
-                <file>tests/bootstrap.php</file>
-            </exclude>
+            <directory suffix=".php">tests/Codzo</directory>
         </whitelist>
     </filter>
     <logging>
-        <log type="coverage-html" target="reports/phpunit/html/"
+        <log type="coverage-html" target="tests/reports/phpunit/html/"
             lowUpperBound="35" highLowerBound="70"/>
-        <log type="coverage-clover" target="reports/phpunit/xml/coverage.xml"/>
-        <log type="testdox-text" target="reports/phpunit/testdox/testdox.txt"/>
+        <log type="coverage-clover" target="tests/reports/phpunit/xml/coverage.xml"/>
+        <log type="testdox-text" target="tests/reports/phpunit/testdox/testdox.txt"/>
     </logging>
 </phpunit>
 

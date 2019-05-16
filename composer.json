@@ -4,7 +4,7 @@
     "description": "Configuration handler",
     "keywords": ["config", "setting"],
     "homepage": "https://github.com/codzo/Config",
-    "license": "Apache License",
+    "license": "Apache-2.0",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "authors": [

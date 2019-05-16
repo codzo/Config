@@ -231,4 +231,12 @@ class Config
     {
         $this->settings[$name] = $value ;
     }
+
+    /**
+     * get all settings
+     */
+    public function toArray()
+    {
+        return $this->settings;
+    }
 }

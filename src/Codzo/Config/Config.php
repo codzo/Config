@@ -1,10 +1,12 @@
 <?php
+
 /**
  * Codzo/Config.php
  * @author Neil Fan<neil.fan@codzo.com>
  * @version GIT: $Id$
  * @package Codzo\Config
  */
+
 namespace Codzo\Config;
 
 use Codzo\Config\Exception\InvalidConfigDirectoryException;
@@ -44,12 +46,12 @@ class Config
      * and loaded configurations as value. Data will be shared within multiple
      * Config instances to minimise the payload of reuse.
      */
-    protected static $master_settings=[];
+    protected static $master_settings = [];
 
     /**
      * loaded configuration for current directory
      */
-    protected $settings=null;
+    protected $settings = null;
 
     /**
      * constructor
@@ -98,6 +100,11 @@ class Config
         return '';
     }
 
+    /**
+     * Get driver class name
+     * @param  string      name of config file
+     * @return string|null driver class name to handle the config file
+     */
     public function getDriver($driver_class_name)
     {
         static $driver_list = array();
@@ -119,17 +126,20 @@ class Config
 
     /**
      * get a list of valid config files.
+     * This method will only look for files in dest dir, no subdirectories.
      * @return array list of config files
      */
     public function getConfigFileList()
     {
         $list = [];
-        if (is_readable($this->config_directory)
-            && $handle = opendir($this->config_directory)) {
+        if (
+            is_readable($this->config_directory)
+            && $handle = opendir($this->config_directory)
+        ) {
             while (false !== ($file = readdir($handle))) {
                 // do something with the file
                 // note that '.' and '..' is returned even
-                if ($file[0]=='.') {
+                if ($file[0] == '.') {
                     continue;
                 }
 
@@ -214,7 +224,7 @@ class Config
                 break;
             }
 
-            if (sizeof($path)===0) {
+            if (sizeof($path) === 0) {
                 // we are at the end of search
                 return $settings;
             }

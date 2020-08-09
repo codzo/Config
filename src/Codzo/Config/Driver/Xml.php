@@ -27,7 +27,10 @@ class Xml extends AbstractDriver
         $xml = simplexml_load_string(file_get_contents($file_path));
 
         if ($xml instanceof \SimpleXMLElement) {
-            $data[$xml->getName()] = (array)$xml;
+            $data[$xml->getName()] = json_decode(
+                json_encode((array)$xml),
+                1
+            );
         }
 
         if (!$data) {

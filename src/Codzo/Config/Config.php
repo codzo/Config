@@ -59,21 +59,22 @@ class Config
      */
     public function __construct($directory = null)
     {
-        if ($directory) {
-            if (! is_dir($directory)) {
-                throw new InvalidConfigDirectoryException();
-            }
-            $this->config_directory = $directory ;
-        } else {
-            $this->config_directory = self::DEFAULT_CONFIG_DIRECTORY ;
+        if (is_null($directory)) {
+            $directory = self::DEFAULT_CONFIG_DIRECTORY ;
         }
+        if (! is_dir($directory)) {
+            throw new InvalidConfigDirectoryException();
+        }
+        $this->config_directory = realpath($directory);
 
         if (!isset(static::$master_settings[$this->config_directory])) {
             static::$master_settings[$this->config_directory] = [];
         }
         $this->settings = &static::$master_settings[$this->config_directory];
 
-        $this->load();
+        if (!$this->settings) {
+            $this->load();
+        }
     }
 
     /**

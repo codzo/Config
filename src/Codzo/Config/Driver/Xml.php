@@ -37,6 +37,30 @@ class Xml extends AbstractDriver
             throw new InvalidConfigFileException($file_path);
         }
 
-        return $data;
+        return $this->emptyArrayToNull($data);
+    }
+
+    /**
+     * convert empty array to null value
+     * When converting XML to array, you will get
+     *     <foo/> => foo=>[]
+     * while expecting foo=>null.
+     * This function replaces all empty array to NULL
+     *
+     * @param $item array the value to process
+     * @return array with all [] children replaced with null
+     */
+    protected function emptyArrayToNull($item)
+    {
+        if (is_array($item)) {
+            if (count($item) == 0) {
+                return null;
+            }
+            return array_map(
+                array($this, __METHOD__),
+                $item
+            );
+        }
+        return $item;
     }
 }

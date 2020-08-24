@@ -1,10 +1,12 @@
 <?php
+
 /**
  * Codzo/Config/Driver/Php.php
  * @author Neil Fan<neil.fan@codzo.com>
  * @version GIT: $Id$
  * @package Codzo\Config
  */
+
 namespace Codzo\Config\Driver;
 
 use Codzo\Config\Driver\AbstractDriver;
@@ -17,7 +19,13 @@ class Php extends AbstractDriver
 {
     public $name = 'PHP';
 
-    public function parse($file_path)
+    /**
+     * parse the config file
+     *
+     * @param $file_path string the file path
+     * @return array
+     */
+    public function parse($file_path): array
     {
         $data   = false;
         $output = [];

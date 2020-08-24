@@ -19,7 +19,13 @@ class Xml extends AbstractDriver
 {
     public $name = 'Xml';
 
-    public function parse($file_path)
+    /**
+     * parse the config file
+     *
+     * @param $file_path string the file path
+     * @return array
+     */
+    public function parse($file_path): array
     {
         $data = array();
         // Note: we do not use `simplexml_load_file()`

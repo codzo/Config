@@ -9,16 +9,14 @@
 
 namespace Codzo\Config\Driver;
 
-use Codzo\Config\Driver\AbstractDriver;
+use Codzo\Config\Driver\IDriver;
 use Codzo\Config\Exception\InvalidConfigFileException;
 
 /**
  * class Ini
  */
-class Ini extends AbstractDriver
+class Ini implements IDriver
 {
-    public $name = 'INI';
-
     /**
      * parse the config file
      *

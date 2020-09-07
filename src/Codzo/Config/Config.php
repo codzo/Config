@@ -10,7 +10,7 @@
 namespace Codzo\Config;
 
 use Codzo\Config\Exception\InvalidConfigDirectoryException;
-use Codzo\Config\Driver\AbstractDriver;
+use Codzo\Config\Driver\IDriver;
 
 /**
  * Config class
@@ -112,7 +112,7 @@ class Config
         if (!isset($driver_list[$driver_class_name])) {
             if (class_exists($driver_class_name)) {
                 $driver = new $driver_class_name();
-                if ($driver instanceof AbstractDriver) {
+                if ($driver instanceof IDriver) {
                     $driver_list[$driver_class_name] = $driver;
                 }
             }

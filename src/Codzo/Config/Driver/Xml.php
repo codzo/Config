@@ -9,16 +9,13 @@
 
 namespace Codzo\Config\Driver;
 
-use Codzo\Config\Driver\AbstractDriver;
 use Codzo\Config\Exception\InvalidConfigFileException;
 
 /**
  * class Xml
  */
-class Xml extends AbstractDriver
+class Xml implements IDriver
 {
-    public $name = 'Xml';
-
     /**
      * parse the config file
      *

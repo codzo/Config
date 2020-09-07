@@ -9,16 +9,13 @@
 
 namespace Codzo\Config\Driver;
 
-use Codzo\Config\Driver\AbstractDriver;
 use Codzo\Config\Exception\InvalidConfigFileException;
 
 /**
  * class Ini
  */
-class Php extends AbstractDriver
+class Php implements IDriver
 {
-    public $name = 'PHP';
-
     /**
      * parse the config file
      *

@@ -49,6 +49,12 @@ class Config
     protected static $master_settings = [];
 
     /**
+     * the reference to last Config instance
+     * This is used for Factory Pattern
+     */
+    protected static $last_instance = null;
+
+    /**
      * loaded configuration for current directory
      */
     protected $settings = null;
@@ -75,6 +81,8 @@ class Config
         if (!$this->settings) {
             $this->load();
         }
+
+        static::$last_instance = &$this;
     }
 
     /**
@@ -249,5 +257,18 @@ class Config
     public function toArray()
     {
         return $this->settings;
+    }
+
+    /**
+     * get instance
+     * @return Config the last instance, or new instance if none
+     */
+    public static function getInstance()
+    {
+        if(!static::$last_instance) {
+            new Config();
+        }
+
+        return static::$last_instance;
     }
 }
